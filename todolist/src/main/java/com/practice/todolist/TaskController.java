@@ -23,15 +23,17 @@ public class TaskController {
         return tasks.get(id - 1);
     }
 
-    private static final String NOT_FOUND_MESSAGE = "Task not found for the number.";
+    // moving handler to Exception handler class
 
-    @ExceptionHandler(IndexOutOfBoundsException.class)
-    @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    public HashMap<String, String> handleIndexOutOfBoundsException (Exception e) {
-        HashMap<String, String> response = new HashMap<>();
-        response.put("message", NOT_FOUND_MESSAGE);
-        response.put("error", e.getClass().getSimpleName());
-        return response;
-    }
+//    private static final String NOT_FOUND_MESSAGE = "Task not found for the number.";
+//
+//    @ExceptionHandler(IndexOutOfBoundsException.class)
+//    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+//    public HashMap<String, String> handleIndexOutOfBoundsException (Exception e) {
+//        HashMap<String, String> response = new HashMap<>();
+//        response.put("message", NOT_FOUND_MESSAGE);
+//        response.put("error", e.getClass().getSimpleName());
+//        return response;
+//    }
 
 }
