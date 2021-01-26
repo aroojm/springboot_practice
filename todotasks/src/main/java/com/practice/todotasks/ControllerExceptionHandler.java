@@ -15,7 +15,7 @@ public class ControllerExceptionHandler {
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     public HashMap<String, String> handleIndexOutOfBoundsException (Exception e) {
         HashMap<String, String> response = new HashMap<>();
-        response.put("message", NOT_FOUND_MESSAGE);
+        response.put("message", NOT_FOUND_MESSAGE + " Handled by global handler");
         response.put("error", e.getClass().getSimpleName());
         return response;
     }

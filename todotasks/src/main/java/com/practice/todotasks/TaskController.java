@@ -3,10 +3,13 @@ package com.practice.todotasks;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.Ordered;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.HashMap;
 
 @RestController
 public class TaskController {
@@ -32,18 +35,17 @@ public class TaskController {
         return tasks.get(id - 1);
     }
 
-    // moving handler to Exception handler class
 
-//    private static final String NOT_FOUND_MESSAGE = "Task not found for the number.";
-//
-//    @ExceptionHandler(IndexOutOfBoundsException.class)
-//    @ResponseStatus(code = HttpStatus.NOT_FOUND)
-//    public HashMap<String, String> handleIndexOutOfBoundsException (Exception e) {
-//        HashMap<String, String> response = new HashMap<>();
-//        response.put("message", NOT_FOUND_MESSAGE);
-//        response.put("error", e.getClass().getSimpleName());
-//        return response;
-//    }
+    private static final String NOT_FOUND_MESSAGE = "Task not found for the number.";
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @ExceptionHandler(IndexOutOfBoundsException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public HashMap<String, String> handleIndexOutOfBoundsException (Exception e) {
+        HashMap<String, String> response = new HashMap<>();
+        response.put("message", NOT_FOUND_MESSAGE + " Handled by controller lever handler");
+        response.put("error", e.getClass().getSimpleName());
+        return response;
+    }
 
 }
 
